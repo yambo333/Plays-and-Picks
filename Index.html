@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Plays & Picks</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #f1f1f1;
+    }
+    header {
+      background-color: #1f1f1f;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 1rem;
+      color: #f1f1f1;
+      text-decoration: none;
+    }
+    section {
+      padding: 2rem;
+    }
+    h2 {
+      border-bottom: 1px solid #444;
+      padding-bottom: 0.5rem;
+    }
+    .tabs button {
+      background-color: #2a2a2a;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin-right: 0.5rem;
+      cursor: pointer;
+    }
+    .tabs button.active {
+      background-color: #007acc;
+    }
+    .stock-list {
+      margin-top: 1rem;
+      padding-left: 1rem;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      margin: 0.3rem 0;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #1f1f1f;
+    }
+  </style>
+  <script>
+    function showTab(tabName) {
+      const tabs = ['daily', 'monthly', 'yearly'];
+      tabs.forEach(tab => {
+        document.getElementById(tab).style.display = 'none';
+        document.getElementById(tab + '-btn').classList.remove('active');
+      });
+      document.getElementById(tabName).style.display = 'block';
+      document.getElementById(tabName + '-btn').classList.add('active');
+    }
+    window.onload = () => showTab('daily');
+  </script>
+</head>
+<body>
+
+  <header>
+    <h1>Plays & Picks</h1>
+    <nav>
+      <a href="#sports">Sports</a>
+      <a href="#stocks">Stocks</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section id="sports">
+    <h2>Sports Analysis</h2>
+    <p>Breaking down games, matchups, and predictions. Weekly picks and takes on the latest in sports.</p>
+  </section>
+
+  <section id="stocks">
+    <h2>Stock Insights</h2>
+    <div class="stock-section">
+      <h3>Live Chart</h3>
+      <div style="height:400px">
+        <iframe src="https://s.tradingview.com/widgetembed/?frameElementId=tradingview_e1234&symbol=NASDAQ%3AAAPL&interval=D&hidesidetoolbar=1&symboledit=1&saveimage=1&toolbarbg=f1f3f6&studies=[]&theme=dark&style=1&timezone=Etc%2FUTC&withdateranges=1&hideideas=1&enable_publishing=false" 
+          width="100%" height="100%" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+      </div>
+    </div>
+
+    <div class="stock-section">
+      <h3>Top 10 Stocks</h3>
+      <div class="tabs">
+        <button id="daily-btn" onclick="showTab('daily')">Daily</button>
+        <button id="monthly-btn" onclick="showTab('monthly')">Monthly</button>
+        <button id="yearly-btn" onclick="showTab('yearly')">Yearly</button>
+      </div>
+      <div id="daily" class="stock-list">
+        <ul>
+          <li>Apple (AAPL)</li>
+          <li>Microsoft (MSFT)</li>
+          <li>Amazon (AMZN)</li>
+          <li>Tesla (TSLA)</li>
+          <li>Meta (META)</li>
+          <li>NVIDIA (NVDA)</li>
+          <li>AMD (AMD)</li>
+          <li>Google (GOOGL)</li>
+          <li>Netflix (NFLX)</li>
+          <li>Disney (DIS)</li>
+        </ul>
+      </div>
+      <div id="monthly" class="stock-list" style="display:none;">
+        <ul>
+          <li>Shopify (SHOP)</li>
+          <li>Coinbase (COIN)</li>
+          <li>Palantir (PLTR)</li>
+          <li>Roku (ROKU)</li>
+          <li>Zoom (ZM)</li>
+          <li>Uber (UBER)</li>
+          <li>Airbnb (ABNB)</li>
+          <li>Snowflake (SNOW)</li>
+          <li>Square (SQ)</li>
+          <li>Pinterest (PINS)</li>
+        </ul>
+      </div>
+      <div id="yearly" class="stock-list" style="display:none;">
+        <ul>
+          <li>Visa (V)</li>
+          <li>MasterCard (MA)</li>
+          <li>Caterpillar (CAT)</li>
+          <li>Boeing (BA)</li>
+          <li>Chevron (CVX)</li>
+          <li>Pepsi (PEP)</li>
+          <li>Costco (COST)</li>
+          <li>Walmart (WMT)</li>
+          <li>Target (TGT)</li>
+          <li>ExxonMobil (XOM)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="stock-section">
+      <h3>Today's Movers</h3>
+      <ul>
+        <li>GameStop (GME)</li>
+        <li>AMC Entertainment (AMC)</li>
+        <li>Carvana (CVNA)</li>
+        <li>DraftKings (DKNG)</li>
+        <li>Beyond Meat (BYND)</li>
+        <li>Upstart (UPST)</li>
+        <li>Lucid Motors (LCID)</li>
+        <li>Rivian (RIVN)</li>
+        <li>Robinhood (HOOD)</li>
+        <li>SoFi (SOFI)</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>Former sales rep turned analyst. I break down plays on the field and in the market. No fluff—just trends, data, and strategy.</p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: you@example.com</p>
+  </section>
+
+  <footer>
+    <p>© 2025 Plays & Picks. All rights reserved.</p>
+  </footer>
+
+</<script>
+  const API_KEY = 'YOUR_API_KEY_HERE'; // <-- Replace this with your actual key
+
+  // Sample top symbols for display
+  const topSymbols = ['AAPL', 'MSFT', 'TSLA', 'GOOGL', 'AMZN', 'NVDA', 'META', 'NFLX', 'AMD', 'DIS'];
+
+  async function fetchQuote(symbol) {
+    const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`);
+    return res.json();
+  }
+
+  async function displayTopStocks() {
+    const dailyList = document.getElementById('daily');
+    dailyList.innerHTML = '<ul></ul>';
+    for (const symbol of topSymbols) {
+      const quote = await fetchQuote(symbol);
+      const listItem = document.createElement('li');
+      listItem.textContent = `${symbol} — $${quote.c} (Open: $${quote.o})`;
+      dailyList.querySelector('ul').appendChild(listItem);
+    }
+  }
+
+  async function displayMovers() {
+    // Fake a mover list with % gain (you can replace this with your own logic or screener API)
+    const moversList = document.querySelector('.stock-section:last-of-type ul');
+    moversList.innerHTML = '';
+    for (const symbol of topSymbols.sort(() => 0.5 - Math.random()).slice(0, 10)) {
+      const quote = await fetchQuote(symbol);
+      const change = ((quote.c - quote.pc) / quote.pc) * 100;
+      const listItem = document.createElement('li');
+      listItem.textContent = `${symbol} — $${quote.c.toFixed(2)} (${change.toFixed(2)}%)`;
+      moversList.appendChild(listItem);
+    }
+  }
+
+  window.onload = async () => {
+    showTab('daily');
+    await displayTopStocks();
+    await displayMovers();
+  };
+</script>
+  <body>
+</html>
