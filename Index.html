@@ -103,20 +103,7 @@
         <button id="monthly-btn" onclick="showTab('monthly')">Monthly</button>
         <button id="yearly-btn" onclick="showTab('yearly')">Yearly</button>
       </div>
-      <div id="daily" class="stock-list">
-        <ul>
-          <li>Apple (AAPL)</li>
-          <li>Microsoft (MSFT)</li>
-          <li>Amazon (AMZN)</li>
-          <li>Tesla (TSLA)</li>
-          <li>Meta (META)</li>
-          <li>NVIDIA (NVDA)</li>
-          <li>AMD (AMD)</li>
-          <li>Google (GOOGL)</li>
-          <li>Netflix (NFLX)</li>
-          <li>Disney (DIS)</li>
-        </ul>
-      </div>
+      <div id="daily" class="stock-list"><ul></ul></div>
       <div id="monthly" class="stock-list" style="display:none;">
         <ul>
           <li>Shopify (SHOP)</li>
@@ -149,17 +136,8 @@
 
     <div class="stock-section">
       <h3>Today's Movers</h3>
-      <ul>
-        <li>GameStop (GME)</li>
-        <li>AMC Entertainment (AMC)</li>
-        <li>Carvana (CVNA)</li>
-        <li>DraftKings (DKNG)</li>
-        <li>Beyond Meat (BYND)</li>
-        <li>Upstart (UPST)</li>
-        <li>Lucid Motors (LCID)</li>
-        <li>Rivian (RIVN)</li>
-        <li>Robinhood (HOOD)</li>
-        <li>SoFi (SOFI)</li>
+      <ul id="movers-list">
+        <li>Loading...</li>
       </ul>
     </div>
   </section>
@@ -178,46 +156,44 @@
     <p>© 2025 Plays & Picks. All rights reserved.</p>
   </footer>
 
-</<script>
-  const API_KEY = 'd0j5nv9r01ql09hqcca0d0j5nv9r01ql09hqccag'; // <-- Replace this with your actual key
+  <script>
+    const API_KEY = 'd0j5nv9r01ql09hqcca0d0j5nv9r01ql09hqccag';
+    const topSymbols = ['AAPL', 'MSFT', 'TSLA', 'GOOGL', 'AMZN', 'NVDA', 'META', 'NFLX', 'AMD', 'DIS'];
 
-  // Sample top symbols for display
-  const topSymbols = ['AAPL', 'MSFT', 'TSLA', 'GOOGL', 'AMZN', 'NVDA', 'META', 'NFLX', 'AMD', 'DIS'];
-
-  async function fetchQuote(symbol) {
-    const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`);
-    return res.json();
-  }
-
-  async function displayTopStocks() {
-    const dailyList = document.getElementById('daily');
-    dailyList.innerHTML = '<ul></ul>';
-    for (const symbol of topSymbols) {
-      const quote = await fetchQuote(symbol);
-      const listItem = document.createElement('li');
-      listItem.textContent = `${symbol} — $${quote.c} (Open: $${quote.o})`;
-      dailyList.querySelector('ul').appendChild(listItem);
+    async function fetchQuote(symbol) {
+      const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`);
+      return res.json();
     }
-  }
 
-  async function displayMovers() {
-    // Fake a mover list with % gain (you can replace this with your own logic or screener API)
-    const moversList = document.querySelector('.stock-section:last-of-type ul');
-    moversList.innerHTML = '';
-    for (const symbol of topSymbols.sort(() => 0.5 - Math.random()).slice(0, 10)) {
-      const quote = await fetchQuote(symbol);
-      const change = ((quote.c - quote.pc) / quote.pc) * 100;
-      const listItem = document.createElement('li');
-      listItem.textContent = `${symbol} — $${quote.c.toFixed(2)} (${change.toFixed(2)}%)`;
-      moversList.appendChild(listItem);
+    async function displayTopStocks() {
+      const dailyList = document.getElementById('daily').querySelector('ul');
+      dailyList.innerHTML = '';
+      for (const symbol of topSymbols) {
+        const quote = await fetchQuote(symbol);
+        const li = document.createElement('li');
+        li.textContent = `${symbol} — $${quote.c}`;
+        dailyList.appendChild(li);
+      }
     }
-  }
 
-  window.onload = async () => {
-    showTab('daily');
-    await displayTopStocks();
-    await displayMovers();
-  };
-</script>
-  <body>
+    async function displayMovers() {
+      const moversList = document.getElementById('movers-list');
+      moversList.innerHTML = '';
+      for (const symbol of topSymbols.sort(() => 0.5 - Math.random()).slice(0, 10)) {
+        const quote = await fetchQuote(symbol);
+        const change = ((quote.c - quote.pc) / quote.pc) * 100;
+        const li = document.createElement('li');
+        li.textContent = `${symbol} — $${quote.c.toFixed(2)} (${change.toFixed(2)}%)`;
+        moversList.appendChild(li);
+      }
+    }
+
+    window.onload = async () => {
+      showTab('daily');
+      await displayTopStocks();
+      await displayMovers();
+    };
+  </script>
+
+</body>
 </html>
